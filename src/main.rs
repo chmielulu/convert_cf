@@ -11,12 +11,12 @@ fn main() {
 
     clear_console();
 
-    let number: i32 = get_number();
+    let grades: i32 = get_temperature();
 
     if choose == 1 {
-        print!("{} celsius is {} fahrenheit", number, (number * 9/5) + 32);
+        print!("{} °C is {} °F", grades, (grades * 9/5) + 32);
     } else {
-        print!("{} fahrenheit is {} celsius", number, (number - 32) * 5/9);
+        print!("{} °F is {} °C", grades, (grades - 32) * 5/9);
     }
     
 }
@@ -45,24 +45,25 @@ fn get_choose() -> u8 {
     choose
 }
 
-fn get_number() -> i32 {
-    let mut number = String::new();
-
-    let number: i32 = loop {
-        print!("Type a number: ");
+fn get_temperature() -> i32 {
+    
+    let grades: i32 = loop {
+        print!("Type the temperature: ");
         io::stdout().flush().unwrap();
         
+        let mut grades = String::new();
+
         io::stdin()
-            .read_line(&mut number)
+            .read_line(&mut grades)
             .expect("Failed to read line!");
     
-        match number.trim().parse() {
-            Ok(num) => break num,
+        match grades.trim().parse() {
+            Ok(grad) => break grad,
             Err(_) => continue,
         };
     };
 
-    number
+    grades
 }
 
 fn clear_console() {
